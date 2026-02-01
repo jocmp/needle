@@ -80,7 +80,9 @@ describe("lookupAccount", () => {
       Promise.resolve(new Response(null, { status: 404 })),
     );
 
-    expect(lookupAccount("nonexistent")).rejects.toBeInstanceOf(AccountNotFound);
+    expect(lookupAccount("nonexistent")).rejects.toBeInstanceOf(
+      AccountNotFound,
+    );
   });
 
   test("throws FetchError for server error", async () => {

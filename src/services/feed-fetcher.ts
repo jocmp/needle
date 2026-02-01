@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
 import { db } from "../db";
-import { entries, feeds } from "../db/schema";
+import { type MediaAttachment, entries, feeds } from "../db/schema";
 import { fetchStatuses, lookupAccount } from "./mastodon";
 
 type Feed = typeof feeds.$inferSelect;
@@ -27,11 +27,21 @@ export async function refreshFeed(feed: Feed): Promise<void> {
 
     if (existing) continue;
 
+    const mediaAttachments: MediaAttachment[] = status.media_attachments
+      .filter((m) => m.type !== "unknown")
+      .map((m) => ({
+        type: m.type as MediaAttachment["type"],
+        url: m.url,
+        previewUrl: m.preview_url,
+        description: m.description,
+      }));
+
     await db.insert(entries).values({
       feedId: feed.id,
       externalId: status.id,
       content: status.content,
       url: status.url,
+      mediaAttachments: mediaAttachments.length > 0 ? mediaAttachments : null,
       publishedAt: new Date(status.created_at),
     });
   }

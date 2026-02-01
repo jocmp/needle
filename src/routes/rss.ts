@@ -1,7 +1,7 @@
 import { desc, eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { db } from "../db";
-import { entries, feeds } from "../db/schema";
+import { type MediaAttachment, entries, feeds } from "../db/schema";
 
 const app = new Hono();
 
@@ -26,7 +26,7 @@ app.get("/:uuid/entries.xml", async (c) => {
   const handle = feed.threadsHandle.replace("@threads.net", "");
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>@${handle} on Threads</title>
     <link>https://www.threads.net/@${handle}</link>
@@ -42,7 +42,7 @@ app.get("/:uuid/entries.xml", async (c) => {
       <link>${entry.url || `https://www.threads.net/@${handle}`}</link>
       <guid isPermaLink="false">${entry.externalId}</guid>
       <pubDate>${entry.publishedAt ? new Date(entry.publishedAt).toUTCString() : ""}</pubDate>
-      <description><![CDATA[${entry.content || ""}]]></description>
+      <description><![CDATA[${entry.content || ""}]]></description>${renderMediaAttachments(entry.mediaAttachments)}
     </item>`,
       )
       .join("")}
@@ -53,6 +53,34 @@ app.get("/:uuid/entries.xml", async (c) => {
     "Content-Type": "application/rss+xml; charset=utf-8",
   });
 });
+
+function renderMediaAttachments(attachments: MediaAttachment[] | null): string {
+  if (!attachments || attachments.length === 0) return "";
+
+  return attachments
+    .map((media) => {
+      const medium = media.type === "gifv" ? "video" : media.type;
+      const mimeType = getMimeType(media.type, media.url);
+      const title = media.description
+        ? ` title="${escapeXml(media.description)}"`
+        : "";
+
+      return `
+      <media:content url="${escapeXml(media.url)}" medium="${medium}" type="${mimeType}"${title}/>`;
+    })
+    .join("");
+}
+
+function getMimeType(type: MediaAttachment["type"], url: string): string {
+  if (type === "video" || type === "gifv") return "video/mp4";
+  if (type === "audio") return "audio/mpeg";
+
+  // For images, try to determine from URL
+  if (url.includes(".png")) return "image/png";
+  if (url.includes(".gif")) return "image/gif";
+  if (url.includes(".webp")) return "image/webp";
+  return "image/jpeg";
+}
 
 function escapeXml(text: string): string {
   return text

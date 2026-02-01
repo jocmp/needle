@@ -22,11 +22,20 @@ export type MastodonAccount = {
   avatar: string;
 };
 
+export type MastodonMediaAttachment = {
+  id: string;
+  type: "image" | "video" | "gifv" | "audio" | "unknown";
+  url: string;
+  preview_url?: string;
+  description?: string;
+};
+
 export type MastodonStatus = {
   id: string;
   content: string;
   url: string;
   created_at: string;
+  media_attachments: MastodonMediaAttachment[];
 };
 
 export async function lookupAccount(handle: string): Promise<MastodonAccount> {

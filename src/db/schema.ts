@@ -1,6 +1,7 @@
 import { relations } from "drizzle-orm";
 import {
   integer,
+  jsonb,
   pgTable,
   serial,
   text,
@@ -28,6 +29,13 @@ export const feeds = pgTable("feeds", {
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
 
+export type MediaAttachment = {
+  type: "image" | "video" | "gifv" | "audio";
+  url: string;
+  previewUrl?: string;
+  description?: string;
+};
+
 export const entries = pgTable("entries", {
   id: serial("id").primaryKey(),
   feedId: integer("feed_id")
@@ -36,6 +44,7 @@ export const entries = pgTable("entries", {
   externalId: varchar("external_id", { length: 255 }).notNull(),
   content: text("content"),
   url: varchar("url", { length: 2048 }),
+  mediaAttachments: jsonb("media_attachments").$type<MediaAttachment[]>(),
   publishedAt: timestamp("published_at"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),

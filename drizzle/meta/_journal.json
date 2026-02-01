@@ -15,6 +15,13 @@
       "when": 1769919467149,
       "tag": "0001_magenta_exodus",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1769923806680,
+      "tag": "0002_striped_black_bolt",
+      "breakpoints": true
     }
   ]
 }

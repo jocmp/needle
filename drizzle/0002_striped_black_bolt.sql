@@ -1,0 +1,1 @@
+ALTER TABLE "entries" ADD COLUMN "media_attachments" jsonb;

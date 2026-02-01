@@ -1,6 +1,6 @@
 {
-  "id": "0cc1d86b-404c-41a8-ba5c-536e4651c4f9",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "7d741694-3e13-459c-80f2-06e767b8ff21",
+  "prevId": "b5395588-f333-413d-b68e-5c55aa6c23d2",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -35,6 +35,12 @@
         "url": {
           "name": "url",
           "type": "varchar(2048)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "media_attachments": {
+          "name": "media_attachments",
+          "type": "jsonb",
           "primaryKey": false,
           "notNull": false
         },
@@ -103,6 +109,12 @@
         "mastodon_id": {
           "name": "mastodon_id",
           "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "avatar_url": {
+          "name": "avatar_url",
+          "type": "varchar(2048)",
           "primaryKey": false,
           "notNull": false
         },
