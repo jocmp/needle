@@ -1,16 +1,13 @@
-.PHONY: up down dev test db-setup
-
-up:
-	docker compose up -d
-
-down:
-	docker compose down
+.PHONY: dev test check db-setup
 
 dev:
 	bin/dev
 
 test:
 	bin/rspec
+
+check:
+	bin/rubocop -f github
 
 db-setup:
 	bin/rails db:create db:migrate

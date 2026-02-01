@@ -33,9 +33,6 @@ gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 
 
-# Background jobs
-gem "solid_queue"
-
 # HTTP client for fetching Threads data
 gem "faraday"
 

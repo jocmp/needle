@@ -39,9 +39,6 @@ module Needle
     # Don't generate system test files.
     config.generators.system_tests = nil
 
-    # Use Solid Queue for Active Job
-    config.active_job.queue_adapter = :solid_queue
-
     # Custom configuration namespace
     config.needle = ActiveSupport::OrderedOptions.new
   end
