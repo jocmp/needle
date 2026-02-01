@@ -9,6 +9,21 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: needle
+          POSTGRES_PASSWORD: needle
+          POSTGRES_DB: needle_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
       - uses: actions/checkout@v4
 
@@ -21,6 +36,7 @@ jobs:
         run: bin/rails db:create db:migrate
         env:
           RAILS_ENV: test
+          DATABASE_URL: postgresql://needle:needle@localhost:5432/needle_test
 
       - name: Compile assets
         run: bin/rails assets:precompile
@@ -29,6 +45,8 @@ jobs:
 
       - name: Run tests
         run: bin/rspec
+        env:
+          DATABASE_URL: postgresql://needle:needle@localhost:5432/needle_test
 
   lint:
     runs-on: ubuntu-latest
