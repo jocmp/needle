@@ -1,4 +1,4 @@
-.PHONY: up down dev test check fix deploy db-setup
+.PHONY: dev build check fix test deploy up down db-generate db-migrate
 
 up:
 	docker compose up -d
@@ -7,19 +7,25 @@ down:
 	docker compose down
 
 dev:
-	bin/dev
+	bun run dev
 
-test:
-	bin/rspec
+build:
+	bun run build
 
 check:
-	bin/rubocop -f github
+	bun run check
 
 fix:
-	bin/rubocop -a
+	bun run check
+
+test:
+	bun test
+
+db-generate:
+	bun run db:generate
+
+db-migrate:
+	bun run db:migrate
 
 deploy:
 	flyctl deploy --remote-only
-
-db-setup:
-	bin/rails db:create db:migrate

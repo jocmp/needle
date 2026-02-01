@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+@theme {
+  /* Victorian color palette */
+  --color-parchment: #f5f0e6;
+  --color-sepia: #d4c5a9;
+  --color-ink: #2c2416;
+  --color-aged: #6b5d4d;
+  --color-burgundy: #722f37;
+  --color-burgundy-dark: #4a1f24;
+  --color-gold: #c9a227;
+  --color-gold-light: #d4b94e;
+
+  /* Typography */
+  --font-display: "Cinzel Decorative", serif;
+  --font-body: "Crimson Text", serif;
+}
