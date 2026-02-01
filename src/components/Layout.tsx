@@ -56,9 +56,6 @@ export const Layout: FC<LayoutProps> = ({
               </a>
               {user ? (
                 <div class="flex items-center gap-6">
-                  <span class="hidden sm:inline text-parchment/80 text-sm italic">
-                    {user.email}
-                  </span>
                   <a
                     class="text-gold hover:text-gold-light text-sm tracking-wide uppercase"
                     href="/feeds"
