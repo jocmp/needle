@@ -105,10 +105,10 @@ app.get("/", (c) => {
   );
 });
 
-// Mount routes
+// Mount routes (RSS first - it's public, no auth required)
 app.route("/", authRoutes);
-app.route("/feeds", feedRoutes);
 app.route("/feeds", rssRoutes);
+app.route("/feeds", feedRoutes);
 
 // 404 handler
 app.notFound((c) => {
