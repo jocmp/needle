@@ -56,7 +56,7 @@ export const Layout: FC<LayoutProps> = ({
               </a>
               {user ? (
                 <div class="flex items-center gap-6">
-                  <span class="text-parchment/80 text-sm italic">
+                  <span class="hidden sm:inline text-parchment/80 text-sm italic">
                     {user.email}
                   </span>
                   <a
