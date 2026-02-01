@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
 import { db } from "../db";
-import { type MediaAttachment, entries, feeds } from "../db/schema";
+import { entries, feeds, type MediaAttachment } from "../db/schema";
 import { fetchStatuses, lookupAccount } from "./mastodon";
 
 type Feed = typeof feeds.$inferSelect;

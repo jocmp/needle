@@ -5,7 +5,7 @@ import { Layout } from "../components/Layout";
 import { db } from "../db";
 import { entries, feeds, subscriptions } from "../db/schema";
 import { alertUrl } from "../lib/alerts";
-import { type User, requireAuth } from "../middleware/auth";
+import { requireAuth, type User } from "../middleware/auth";
 import { refreshFeed } from "../services/feed-fetcher";
 import {
   AccountNotFound,
@@ -327,7 +327,6 @@ app.get("/:uuid", async (c) => {
           <article key={entry.externalId} class="border-b border-aged/20 pb-6">
             <div
               class="prose prose-burgundy max-w-none"
-              // biome-ignore lint: dangerouslySetInnerHTML is needed for HTML content
               dangerouslySetInnerHTML={{ __html: entry.content || "" }}
             />
             <div class="mt-3 text-sm text-aged">

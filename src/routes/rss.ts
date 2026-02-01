@@ -1,7 +1,7 @@
 import { desc, eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { db } from "../db";
-import { type MediaAttachment, entries, feeds } from "../db/schema";
+import { entries, feeds, type MediaAttachment } from "../db/schema";
 
 const app = new Hono();
 

@@ -1,5 +1,4 @@
-import { beforeAll, describe, expect, mock, test } from "bun:test";
-import { Hono } from "hono";
+import { describe, expect, test } from "bun:test";
 import { z } from "zod";
 
 const loginSchema = z.object({
