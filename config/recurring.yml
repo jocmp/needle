@@ -1,0 +1,9 @@
+production:
+  refresh_feeds:
+    class: RefreshFeedsJob
+    schedule: every hour
+
+development:
+  refresh_feeds:
+    class: RefreshFeedsJob
+    schedule: every hour

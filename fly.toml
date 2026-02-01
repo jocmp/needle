@@ -37,3 +37,4 @@ primary_region = "ord"
 
 [processes]
   app = "bin/rails server -p 3000"
+  worker = "bin/jobs"
