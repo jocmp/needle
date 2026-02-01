@@ -75,7 +75,7 @@ app.get("/", async (c) => {
               key={feed.uuid}
               class="border-2 border-aged/20 p-4 bg-parchment/50 hover:border-gold transition-colors"
             >
-              <div class="flex justify-between items-start">
+              <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3">
                 <div class="flex gap-4">
                   {feed.avatarUrl && (
                     <img
@@ -98,7 +98,7 @@ app.get("/", async (c) => {
                     </p>
                   </div>
                 </div>
-                <div class="flex gap-4">
+                <div class="flex gap-4 ml-16 sm:ml-0">
                   <a
                     href={`/feeds/${feed.uuid}/entries.xml`}
                     class="text-gold hover:text-gold-light text-sm uppercase tracking-wide"
