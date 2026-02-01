@@ -8,8 +8,7 @@
 # Dependencies
 /node_modules/
 
-# Build artifacts
-/drizzle/
+# Build artifacts (keep drizzle/ - contains migrations)
 
 # CI/Development
 /.github

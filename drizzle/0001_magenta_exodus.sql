@@ -1,0 +1,1 @@
+ALTER TABLE "feeds" ADD COLUMN "avatar_url" varchar(2048);
