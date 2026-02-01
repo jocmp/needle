@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "Needle" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="bg-parchment min-h-screen font-body text-ink flex flex-col">
+    <!-- Decorative top border -->
+    <div class="bg-burgundy-dark py-1">
+      <div class="max-w-4xl mx-auto flex justify-center">
+        <span class="text-gold text-xs tracking-[0.3em] uppercase">Est. MMXXVI</span>
+      </div>
+    </div>
+
+    <nav class="bg-burgundy border-b-4 border-gold">
+      <div class="max-w-4xl mx-auto px-6 py-4">
+        <div class="flex justify-between items-center">
+          <%= link_to root_path, class: "group" do %>
+            <h1 class="font-display text-2xl text-gold tracking-wider group-hover:text-gold-light transition-colors">
+              NEEDLE
+            </h1>
+            <p class="text-parchment/70 text-xs tracking-widest uppercase -mt-1">Threads Feed Manufactory</p>
+          <% end %>
+
+          <% if logged_in? %>
+            <div class="flex items-center gap-6">
+              <span class="text-parchment/80 text-sm italic"><%= current_user.email %></span>
+              <%= link_to "Thy Feeds", feeds_path, class: "text-gold hover:text-gold-light text-sm tracking-wide uppercase" %>
+              <%= button_to "Depart", logout_path, method: :delete, class: "text-parchment/70 hover:text-parchment text-sm tracking-wide uppercase" %>
+            </div>
+          <% else %>
+            <div class="flex items-center gap-6">
+              <%= link_to "Enter", login_path, class: "text-gold hover:text-gold-light text-sm tracking-wide uppercase" %>
+              <% if Rails.configuration.needle.registration_enabled %>
+                <%= link_to "Register", signup_path, class: "bg-gold text-burgundy-dark px-4 py-2 text-sm tracking-wide uppercase hover:bg-gold-light transition-colors" %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Ornamental divider -->
+    <div class="flex justify-center py-4 bg-parchment">
+      <div class="flex items-center gap-4 text-aged">
+        <span class="text-2xl">&#10022;</span>
+        <div class="w-24 h-px bg-aged"></div>
+        <span class="text-3xl">&#10048;</span>
+        <div class="w-24 h-px bg-aged"></div>
+        <span class="text-2xl">&#10022;</span>
+      </div>
+    </div>
+
+    <main class="max-w-4xl mx-auto px-6 py-8">
+      <% if notice %>
+        <div class="bg-sepia/50 border-2 border-gold text-aged px-6 py-4 mb-6 text-center italic">
+          <span class="text-gold mr-2">&#10038;</span>
+          <%= notice %>
+          <span class="text-gold ml-2">&#10038;</span>
+        </div>
+      <% end %>
+      <% if alert %>
+        <div class="bg-burgundy/10 border-2 border-burgundy text-burgundy-dark px-6 py-4 mb-6 text-center italic">
+          <span class="mr-2">&#9888;</span>
+          <%= alert %>
+        </div>
+      <% end %>
+
+      <!-- Content frame -->
+      <div class="border-4 border-double border-aged/30 p-8 bg-white/50">
+        <%= yield %>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-auto bg-burgundy-dark py-8">
+      <div class="max-w-4xl mx-auto px-6 text-center">
+        <div class="flex justify-center mb-4">
+          <div class="flex items-center gap-3 text-gold/60">
+            <div class="w-16 h-px bg-gold/40"></div>
+            <span class="text-xl">&#10053;</span>
+            <div class="w-16 h-px bg-gold/40"></div>
+          </div>
+        </div>
+        <p class="text-parchment/60 text-sm italic">
+          "The Finest Threads, Delivered to Thy Reader"
+        </p>
+        <p class="text-parchment/40 text-xs mt-2 tracking-widest uppercase">
+          Needle Feed Manufactory &mdash; Quality Assured
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

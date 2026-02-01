@@ -1,0 +1,50 @@
+<div class="max-w-lg mx-auto text-center">
+  <h1 class="font-display text-3xl text-burgundy-dark mb-2">Acquire a Threads Feed</h1>
+  <p class="text-aged italic mb-8">
+    Furnish us with the handle of thy desired correspondent
+  </p>
+
+  <div class="flex justify-center mb-6">
+    <span class="text-gold">&#10070; &#10070; &#10070;</span>
+  </div>
+
+  <%= form_with url: feeds_path, method: :post, class: "space-y-6 text-left" do |f| %>
+    <% if @feed.errors.any? %>
+      <div class="bg-burgundy/10 border-2 border-burgundy p-4">
+        <p class="text-burgundy-dark font-semibold mb-2">Alas, an impediment:</p>
+        <ul class="list-disc list-inside text-burgundy-dark text-sm italic">
+          <% @feed.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div>
+      <%= f.label :handle, "Threads Handle or Address",
+          class: "block text-sm font-semibold text-aged uppercase tracking-wide mb-1" %>
+      <%= f.text_field :handle,
+          value: @feed.threads_handle,
+          placeholder: "@username or https://www.threads.net/@username",
+          class: "w-full px-4 py-3 border-2 border-aged/30 bg-parchment
+                 focus:border-gold focus:outline-none font-body",
+          required: true %>
+      <p class="mt-2 text-aged/70 text-sm italic">
+        e.g., @zuck or the full Threads profile address
+      </p>
+    </div>
+
+    <%= f.submit "Procure This Feed",
+        class: "w-full bg-burgundy text-gold py-3 px-6 uppercase tracking-widest
+               hover:bg-burgundy-dark cursor-pointer transition-colors
+               border-2 border-gold",
+        data: { turbo_submits_with: "Procuring..." } %>
+  <% end %>
+
+  <div class="mt-8 pt-6 border-t border-aged/20">
+    <p class="text-aged">
+      <%= link_to "Return to thy collection", feeds_path,
+          class: "text-burgundy hover:text-burgundy-dark underline" %>
+    </p>
+  </div>
+</div>

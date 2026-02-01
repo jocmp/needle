@@ -1,0 +1,39 @@
+<div class="max-w-md mx-auto text-center">
+  <h1 class="font-display text-3xl text-burgundy-dark mb-2">Welcome Back</h1>
+  <p class="text-aged italic mb-8">Enter thy credentials to proceed</p>
+
+  <div class="flex justify-center mb-6">
+    <span class="text-gold">&#10070; &#10070; &#10070;</span>
+  </div>
+
+  <%= form_with url: login_path, class: "space-y-6 text-left" do |f| %>
+    <div>
+      <%= f.label :email, "Email",
+          class: "block text-sm font-semibold text-aged uppercase tracking-wide mb-1" %>
+      <%= f.email_field :email,
+          class: "w-full px-4 py-3 border-2 border-aged/30 bg-parchment focus:border-gold focus:outline-none font-body",
+          required: true %>
+    </div>
+
+    <div>
+      <%= f.label :password, "Password",
+          class: "block text-sm font-semibold text-aged uppercase tracking-wide mb-1" %>
+      <%= f.password_field :password,
+          class: "w-full px-4 py-3 border-2 border-aged/30 bg-parchment focus:border-gold focus:outline-none font-body",
+          required: true %>
+    </div>
+
+    <%= f.submit "Enter the Establishment",
+        class: "w-full bg-burgundy text-gold py-3 px-6 uppercase tracking-widest
+               hover:bg-burgundy-dark cursor-pointer transition-colors
+               border-2 border-gold" %>
+  <% end %>
+
+  <div class="mt-8 pt-6 border-t border-aged/20">
+    <p class="text-aged">
+      New to our establishment?
+      <%= link_to "Register thy account", signup_path,
+          class: "text-burgundy hover:text-burgundy-dark underline" %>
+    </p>
+  </div>
+</div>

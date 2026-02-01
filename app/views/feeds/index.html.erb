@@ -1,0 +1,68 @@
+<div class="text-center mb-8">
+  <h1 class="font-display text-3xl text-burgundy-dark mb-2">Thy Feed Collection</h1>
+  <p class="text-aged italic">A curated selection of the finest Threads</p>
+</div>
+
+<div class="flex justify-center mb-8">
+  <%= link_to new_feed_path,
+      class: "bg-burgundy text-gold px-6 py-3 uppercase tracking-widest
+             hover:bg-burgundy-dark transition-colors border-2 border-gold" do %>
+    <span class="mr-2">&#10010;</span> Acquire New Feed
+  <% end %>
+</div>
+
+<% if @feeds.empty? %>
+  <div class="text-center py-12 border-2 border-dashed border-aged/30">
+    <p class="text-aged italic text-lg mb-4">
+      Thy collection stands empty, good patron.
+    </p>
+    <p class="text-aged/70">
+      <%= link_to "Procure thy first Threads feed", new_feed_path,
+          class: "text-burgundy hover:text-burgundy-dark underline" %>
+      to commence.
+    </p>
+  </div>
+<% else %>
+  <div class="space-y-4">
+    <% @feeds.each do |feed| %>
+      <div class="border-2 border-aged/20 bg-parchment p-5 hover:border-gold/50 transition-colors">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-4">
+            <% if feed.profile_picture_url.present? %>
+              <img src="<%= feed.profile_picture_url %>"
+                   alt=""
+                   class="w-14 h-14 rounded-full border-2 border-gold/50">
+            <% else %>
+              <div class="w-14 h-14 rounded-full border-2 border-gold/50
+                          bg-sepia flex items-center justify-center">
+                <span class="text-aged text-xl font-serif">@</span>
+              </div>
+            <% end %>
+
+            <div>
+              <%= link_to feed, class: "group" do %>
+                <h2 class="font-serif text-xl text-burgundy-dark group-hover:text-burgundy">
+                  <%= feed.display_name %>
+                </h2>
+              <% end %>
+              <p class="text-aged text-sm">@<%= feed.threads_handle.split('@').first %></p>
+              <p class="text-aged/60 text-xs italic mt-1">
+                <%= feed.entries.count %> dispatches catalogued
+              </p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-4 text-sm">
+            <%= link_to feed_rss_path(feed),
+                class: "text-gold hover:text-gold-dark uppercase tracking-wide",
+                target: "_blank" do %>
+              <span class="mr-1">&#9776;</span> RSS
+            <% end %>
+            <%= link_to "View", feed,
+                class: "text-burgundy hover:text-burgundy-dark uppercase tracking-wide" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
