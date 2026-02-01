@@ -1,4 +1,4 @@
-name: Test
+name: CI
 
 on:
   push:
@@ -19,6 +19,11 @@ jobs:
 
       - name: Set up database
         run: bin/rails db:create db:migrate
+        env:
+          RAILS_ENV: test
+
+      - name: Compile assets
+        run: bin/rails assets:precompile
         env:
           RAILS_ENV: test
 
