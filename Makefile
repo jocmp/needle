@@ -1,4 +1,4 @@
-.PHONY: dev build check test deploy up down db-generate db-migrate db-studio
+.PHONY: dev build check fix test deploy up down db-generate db-migrate
 
 up:
 	docker compose up -d
@@ -15,6 +15,9 @@ build:
 check:
 	bun run check
 
+fix:
+	bun run check
+
 test:
 	bun test
 
@@ -23,9 +26,6 @@ db-generate:
 
 db-migrate:
 	bun run db:migrate
-
-db-studio:
-	bun run db:studio
 
 deploy:
 	flyctl deploy --remote-only
