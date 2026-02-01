@@ -3,8 +3,8 @@ import { refreshAllFeeds } from "./services/feed-fetcher";
 
 console.log("Worker starting...");
 
-// Refresh all feeds every 15 minutes
-const job = new Cron("*/15 * * * *", async () => {
+// Refresh all feeds every hour
+const job = new Cron("0 * * * *", async () => {
   console.log(`[${new Date().toISOString()}] Starting feed refresh...`);
   try {
     await refreshAllFeeds();
