@@ -1,4 +1,10 @@
-.PHONY: dev test check fix deploy db-setup
+.PHONY: up down dev test check fix deploy db-setup
+
+up:
+	docker compose up -d
+
+down:
+	docker compose down
 
 dev:
 	bin/dev

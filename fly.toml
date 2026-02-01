@@ -31,10 +31,6 @@ primary_region = "ord"
   cpu_kind = "shared"
   cpus = 1
 
-[mounts]
-  source = "needle_data"
-  destination = "/rails/storage"
-
 [processes]
   app = "bin/rails server -p 3000"
   worker = "bin/jobs"

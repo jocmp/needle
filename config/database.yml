@@ -1,21 +1,29 @@
 default: &default
-  adapter: sqlite3
+  adapter: postgresql
+  encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  timeout: 5000
 
 development:
   <<: *default
-  database: storage/development.sqlite3
+  database: needle_development
+  username: needle
+  password: needle
+  host: localhost
+  port: 25432
 
 test:
   <<: *default
-  database: storage/test.sqlite3
+  database: needle_test
+  username: needle
+  password: needle
+  host: localhost
+  port: 25432
 
 production:
   primary:
     <<: *default
-    database: storage/production.sqlite3
+    url: <%= ENV["DATABASE_URL"] %>
   queue:
     <<: *default
-    database: storage/production_queue.sqlite3
+    url: <%= ENV["DATABASE_URL"] %>
     migrations_paths: db/queue_migrate
