@@ -1,5 +1,5 @@
 class RegistrationsController < ApplicationController
-  skip_before_action :require_login, only: [:new, :create]
+  skip_before_action :require_login, only: [ :new, :create ]
   before_action :require_registration_enabled
 
   def new

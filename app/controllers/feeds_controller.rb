@@ -1,5 +1,5 @@
 class FeedsController < ApplicationController
-  before_action :set_feed, only: [:show, :destroy, :refresh]
+  before_action :set_feed, only: [ :show, :destroy, :refresh ]
 
   def index
     @feeds = current_user.feeds.includes(:entries)

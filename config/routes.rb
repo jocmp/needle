@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   post "signup", to: "registrations#create"
 
   # Feeds
-  resources :feeds, only: [:index, :new, :create, :show, :destroy] do
+  resources :feeds, only: [ :index, :new, :create, :show, :destroy ] do
     member do
       post :refresh
     end
