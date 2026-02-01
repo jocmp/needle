@@ -30,6 +30,13 @@ primary_region = "ord"
   memory = "512mb"
   cpu_kind = "shared"
   cpus = 1
+  processes = ["app"]
+
+[[vm]]
+  memory = "512mb"
+  cpu_kind = "shared"
+  cpus = 1
+  processes = ["worker"]
 
 [processes]
   app = "bin/rails server -p 3000"
