@@ -1,24 +1,61 @@
-# README
+# Needle
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+RSS feeds for Threads profiles via Mastodon federation.
 
-Things you may want to cover:
+## Stack
 
-* Ruby version
+- **Runtime**: Bun
+- **Framework**: Hono
+- **Database**: PostgreSQL + Drizzle ORM
+- **Styling**: Tailwind CSS v4
+- **Deployment**: Fly.io
 
-* System dependencies
+## Development
 
-* Configuration
+```bash
+# Start PostgreSQL
+make up
 
-* Database creation
+# Run migrations
+make db-migrate
 
-* Database initialization
+# Start dev server
+make dev
+```
 
-* How to run the test suite
+## Environment
 
-* Services (job queues, cache servers, search engines, etc.)
+```bash
+DATABASE_URL=postgres://postgres:postgres@localhost:25432/needle_development
+JWT_SECRET=your-secret-here
+REGISTRATION_ENABLED=true  # Optional, for production
+```
 
-* Deployment instructions
+## Commands
 
-* ...
+```bash
+make up           # Start PostgreSQL
+make down         # Stop PostgreSQL
+make dev          # Run dev server
+make build        # Build CSS
+make check        # Lint
+make test         # Run tests
+make db-generate  # Generate migrations
+make db-migrate   # Run migrations
+make deploy       # Deploy to Fly.io
+```
+
+## Architecture
+
+- `src/index.tsx` - Main app entry
+- `src/routes/` - Route handlers (auth, feeds, rss)
+- `src/components/` - JSX components
+- `src/services/` - Mastodon API, feed fetcher
+- `src/worker.ts` - Background job for feed refresh (hourly)
+
+## How it works
+
+1. User enters a Threads handle
+2. App looks up the account via Mastodon.social's API (Threads federates via ActivityPub)
+3. Fetches posts and stores them as feed entries
+4. Generates RSS at `/feeds/:uuid/entries.xml`
