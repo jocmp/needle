@@ -21,7 +21,7 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.9.4",
+    "@biomejs/biome": "^2.3.13",
     "@tailwindcss/cli": "^4.1.18",
     "@types/bun": "^1.1.14",
     "drizzle-kit": "^0.30.2",
