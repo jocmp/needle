@@ -67,7 +67,6 @@ Rails.application.configure do
 
   # Use Solid Queue for Active Job
   config.active_job.queue_adapter = :solid_queue
-  config.solid_queue.connects_to = { database: { writing: :queue } }
 
   # Disable caching for Action Mailer templates even if Action Controller
   # caching is enabled.
