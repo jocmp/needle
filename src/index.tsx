@@ -12,6 +12,8 @@ const app = new Hono();
 // Static files
 app.use("/styles.css", serveStatic({ path: "./public/styles.css" }));
 app.use("/icon.svg", serveStatic({ path: "./public/icon.svg" }));
+app.use("/favicon.png", serveStatic({ path: "./public/favicon.png" }));
+app.use("/favicon.ico", serveStatic({ path: "./public/favicon.png" }));
 
 // CSRF protection for non-GET requests
 app.use(
