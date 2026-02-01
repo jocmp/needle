@@ -79,7 +79,7 @@ RSpec.describe "Feeds", type: :request do
       it "renders new with error" do
         post feeds_path, params: { handle: 'nonexistent' }
         expect(response).to have_http_status(:unprocessable_content)
-        expect(response.body).to include("Could not find that Threads account")
+        expect(response.body).to include("could not be located")
       end
     end
   end

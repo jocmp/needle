@@ -41,5 +41,8 @@ module Needle
 
     # Use Solid Queue for Active Job
     config.active_job.queue_adapter = :solid_queue
+
+    # Custom configuration namespace
+    config.needle = ActiveSupport::OrderedOptions.new
   end
 end
