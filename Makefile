@@ -1,4 +1,4 @@
-.PHONY: dev test check fix db-setup
+.PHONY: dev test check fix deploy db-setup
 
 dev:
 	bin/dev
@@ -11,6 +11,9 @@ check:
 
 fix:
 	bin/rubocop -a
+
+deploy:
+	flyctl deploy --remote-only
 
 db-setup:
 	bin/rails db:create db:migrate
